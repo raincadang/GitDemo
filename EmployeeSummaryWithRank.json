@@ -1,0 +1,811 @@
+{
+	"info": {
+		"_postman_id": "1dd80708-8f54-4e9e-a229-5a5504b5dbf8",
+		"name": "REGEmployee SummaryWithRank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/token (Log in - Run Me First and When Token Expires)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Save access_token to Postman variables, so that this is\r",
+							"// populated as bearer tokens for subsequent API calls.\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"pm.globals.set('access_token', jsonData.access_token);\r",
+							"console.log(`New token has been set: ${jsonData.access_token}`);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{OcpApimSubscriptionKey}}",
+						"type": "text"
+					},
+					{
+						"key": "Env",
+						"value": "{{Env}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "MerlotAdmin",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "User",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Password1!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://apidev.merlot.aero/auth/token",
+					"protocol": "https",
+					"host": [
+						"apidev",
+						"merlot",
+						"aero"
+					],
+					"path": [
+						"auth",
+						"token"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/token (Example)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{OcpApimSubscriptionKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Env",
+								"value": "{{Env}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "apidemo",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "User",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "example",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://apidev.merlot.aero/auth/token",
+							"protocol": "https",
+							"host": [
+								"apidev",
+								"merlot",
+								"aero"
+							],
+							"path": [
+								"auth",
+								"token"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Length",
+							"value": "750"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "https://merlot-opt.portal.azure-api.net/"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Request-Context",
+							"value": "appId=cid-v1:57853971-56cd-451a-a044-a6ba9debcc42"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "Request-Context"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 17 Feb 2021 11:22:49 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"RE_ipi1XnQ-DaAQeke10bSixhgSU9G6vPyoGl_Ba-1jPCFJloau_eNo-BQS8ofgy022HAThxCQrX96JB2A3Ilt-L39RCvk1m452CdgkHJX8CaOr_ZRVfo4XTx88wW6DHrS0VnVWj79lbNba5VABt4IYFVJykLv1tLqkwszcQ_lW1p3slVLFnZ02aFfTpVx8s_gEvWUr7-EQZnDV5BuYrwvXWx9fq4FJeGvO2yZaJrXQ52tXJfRAliImyH1_O3LQYnPMK2a6HdjD2m0Wfgx2ZcHfQleijz03kia-HpgnSNf5iYbFelBRPx-B8ckgDWd21JQI5wHXWE1YpJQUVhkAceIEUanbyPtqUj-tLgM7lSaCf4n2-TtcG_gZWikVS_3NyEkV77dHuOcQKvxihxu9HPA\",\n    \"token_type\": \"bearer\",\n    \"expires_in\": 1199,\n    \"refresh_token\": \"ffc43ef188bd48e0925085854dc716de\",\n    \"username\": \"apidemo\",\n    \"display-name\": \"API Demo\",\n    \"user-role\": \"User\",\n    \".issued\": \"Wed, 17 Feb 2021 11:22:50 GMT\",\n    \".expires\": \"Wed, 17 Feb 2021 11:42:50 GMT\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Scenario 1. Using User Login Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var empCode = \"66\"\r",
+							"var id = 640\r",
+							"var knowAs = \"MIHO JAVELLANA\"\r",
+							"var name1 = \"MIHO\"\r",
+							"var name4 = \"JAVELLANA\"\r",
+							"var rankCode = \"CP\"\r",
+							"var rankId = 12\r",
+							"var rankName = \"Captain\"\r",
+							"\r",
+							"//Test Status if OK\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"//Performance\r",
+							"pm.test(\"Response time is less than 2000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"//Test data validation\r",
+							"pm.test(\"id\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].id).to.eql(id);\r",
+							"});\r",
+							"pm.test(\"knowAs\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].knowAs).to.eql(knowAs);\r",
+							"});\r",
+							"pm.test(\"name1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].name1).to.eql(name1);\r",
+							"});\r",
+							"pm.test(\"name4\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].name4).to.eql(name4);\r",
+							"});\r",
+							"pm.test(\"rankCode\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].rankCode).to.eql(rankCode);\r",
+							"});\r",
+							"pm.test(\"rankId\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].rankId).to.eql(rankId);\r",
+							"});\r",
+							"pm.test(\"rankName\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].rankName).to.eql(rankName);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{OcpApimSubscriptionKey}}",
+						"type": "text"
+					},
+					{
+						"key": "Env",
+						"value": "{{Env}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://apidev.merlot.aero/employee/api/Employee/SummaryWithRank",
+					"protocol": "https",
+					"host": [
+						"apidev",
+						"merlot",
+						"aero"
+					],
+					"path": [
+						"employee",
+						"api",
+						"Employee",
+						"SummaryWithRank"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/Employee/Get (Example)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{OcpApimSubscriptionKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Env",
+								"value": "{{Env}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://apidev.merlot.aero/employee/api/Employee/XXXXX1",
+							"protocol": "https",
+							"host": [
+								"apidev",
+								"merlot",
+								"aero"
+							],
+							"path": [
+								"employee",
+								"api",
+								"Employee",
+								"XXXXX1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1090"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "https://merlot-opt.portal.azure-api.net/"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Request-Context",
+							"value": "appId=cid-v1:57853971-56cd-451a-a044-a6ba9debcc42"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "Request-Context"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 17 Feb 2021 11:39:17 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"active\": true,\n    \"birthCity\": \"\",\n    \"birthCountry\": null,\n    \"birthState\": \"\",\n    \"concessionCardNumber\": null,\n    \"crewPortalUserId\": \"XXXXX1\",\n    \"dateOfBirth\": \"1950-04-28T00:00:00\",\n    \"dateOfJoining\": \"2009-04-28T00:00:00\",\n    \"dateOfTermination\": null,\n    \"doctor\": null,\n    \"empCode\": \"XXXXX1\",\n    \"employeeAddresses\": [\n        {\n            \"city\": \"\",\n            \"country\": \"New Zealand\",\n            \"primary\": true,\n            \"state\": \"\",\n            \"streetNoName\": \"4 Murdoch Rd, Ponsonby\",\n            \"suburb\": null,\n            \"zip\": \"\",\n            \"changeAction\": 0,\n            \"id\": 7\n        }\n    ],\n    \"employeeAttributes\": [\n        {\n            \"active\": true,\n            \"code\": \"MALE\",\n            \"description\": \"Male\",\n            \"useInOptimizer\": true,\n            \"changeAction\": 0,\n            \"id\": 2\n        }\n    ],\n    \"employeeBases\": [\n        {\n            \"accommodation\": false,\n            \"activeFrom\": \"2014-07-12T00:00:00\",\n            \"activeTo\": \"2079-12-31T00:00:00\",\n            \"car\": false,\n            \"port\": \"AKL\",\n            \"temporary\": false,\n            \"changeAction\": 0,\n            \"id\": 20279\n        }\n    ],\n    \"employeeDepartments\": [\n        {\n            \"activeFrom\": \"2014-07-12T00:00:00\",\n            \"activeTo\": \"2079-12-31T00:00:00\",\n            \"assigned\": \"FLIGHT OPERATIONS\",\n            \"changeAction\": 0,\n            \"id\": 3846\n        }\n    ],\n    \"employeeDocuments\": [\n        {\n            \"country\": null,\n            \"documentType\": \"ROST\",\n            \"expiryDate\": \"2020-04-30T23:59:59\",\n            \"issueDate\": \"2020-04-01T00:00:00\",\n            \"issuingAuthority\": \"Crew Planning\",\n            \"name1\": null,\n            \"name2\": null,\n            \"name3\": null,\n            \"number\": \"30/04/20\",\n            \"placeOfIssue\": \"Head Office\",\n            \"type\": \"Roster\",\n            \"changeAction\": 0,\n            \"id\": 15550\n        },\n        {\n            \"country\": null,\n            \"documentType\": \"ROST\",\n            \"expiryDate\": \"2020-05-31T23:59:59\",\n            \"issueDate\": \"2020-05-01T00:00:00\",\n            \"issuingAuthority\": \"Crew Planning\",\n            \"name1\": null,\n            \"name2\": null,\n            \"name3\": null,\n            \"number\": \"06/05/20\",\n            \"placeOfIssue\": \"Head Office\",\n            \"type\": \"Roster\",\n            \"changeAction\": 0,\n            \"id\": 16149\n        },\n        {\n            \"country\": null,\n            \"documentType\": \"RTR\",\n            \"expiryDate\": \"2023-12-31T00:00:00\",\n            \"issueDate\": \"2018-01-01T00:00:00\",\n            \"issuingAuthority\": \" \",\n            \"name1\": null,\n            \"name2\": null,\n            \"name3\": null,\n            \"number\": \"2313\",\n            \"placeOfIssue\": \" \",\n            \"type\": \"RTR\",\n            \"changeAction\": 0,\n            \"id\": 9875\n        }\n    ],\n    \"employeeEmails\": [],\n    \"employeePhones\": [],\n    \"employeeProfiles\": [],\n    \"employeeRatings\": [\n        {\n            \"activeFrom\": \"2014-07-12T00:00:00\",\n            \"activeTo\": \"2079-12-31T23:59:00\",\n            \"equipmentGroup\": \"737-900\",\n            \"equipmentType\": null,\n            \"isPrimary\": \"\",\n            \"rank\": \"CPT\",\n            \"trainee\": false,\n            \"changeAction\": 0,\n            \"id\": 20102\n        },\n        {\n            \"activeFrom\": \"2014-07-12T00:00:00\",\n            \"activeTo\": \"2079-12-31T23:59:00\",\n            \"equipmentGroup\": \"737-900ER\",\n            \"equipmentType\": null,\n            \"isPrimary\": \"\",\n            \"rank\": \"CPT\",\n            \"trainee\": false,\n            \"changeAction\": 0,\n            \"id\": 20103\n        }\n    ],\n    \"employeeStatus\": null,\n    \"idCardNumber\": null,\n    \"knownAs\": \"OTHER TRAINER  OTHER TRAINER\",\n    \"licenseNumber\": \"\",\n    \"lossOfLicense\": false,\n    \"maritalStatus\": null,\n    \"name1\": \"OTHER TRAINER\",\n    \"name2\": \"\",\n    \"name3\": null,\n    \"name4\": \"OTHER TRAINER\",\n    \"nationality\": \"New Zealand\",\n    \"nationalityCountry\": \"New Zealand\",\n    \"partnerName\": null,\n    \"positionCode\": null,\n    \"positionDate\": null,\n    \"qualifiedUntil\": null,\n    \"secretAnswer\": null,\n    \"secretQuestion\": null,\n    \"seniority\": 1,\n    \"sex\": \"M\",\n    \"unionCode\": null,\n    \"changeAction\": 0,\n    \"id\": 2\n}"
+				}
+			]
+		},
+		{
+			"name": "/token (Log in - Run Me First and When Token Expires) - For Employee Summary",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Save access_token to Postman variables, so that this is\r",
+							"// populated as bearer tokens for subsequent API calls.\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"pm.globals.set('access_token', jsonData.access_token);\r",
+							"console.log(`New token has been set: ${jsonData.access_token}`);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{OcpApimSubscriptionKey}}",
+						"type": "text"
+					},
+					{
+						"key": "Env",
+						"value": "{{Env}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "2476",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "Employee",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://apidev.merlot.aero/auth/token",
+					"protocol": "https",
+					"host": [
+						"apidev",
+						"merlot",
+						"aero"
+					],
+					"path": [
+						"auth",
+						"token"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/token (Example)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{OcpApimSubscriptionKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Env",
+								"value": "{{Env}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "apidemo",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "User",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "example",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://apidev.merlot.aero/auth/token",
+							"protocol": "https",
+							"host": [
+								"apidev",
+								"merlot",
+								"aero"
+							],
+							"path": [
+								"auth",
+								"token"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Length",
+							"value": "750"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "https://merlot-opt.portal.azure-api.net/"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Request-Context",
+							"value": "appId=cid-v1:57853971-56cd-451a-a044-a6ba9debcc42"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "Request-Context"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 17 Feb 2021 11:22:49 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"RE_ipi1XnQ-DaAQeke10bSixhgSU9G6vPyoGl_Ba-1jPCFJloau_eNo-BQS8ofgy022HAThxCQrX96JB2A3Ilt-L39RCvk1m452CdgkHJX8CaOr_ZRVfo4XTx88wW6DHrS0VnVWj79lbNba5VABt4IYFVJykLv1tLqkwszcQ_lW1p3slVLFnZ02aFfTpVx8s_gEvWUr7-EQZnDV5BuYrwvXWx9fq4FJeGvO2yZaJrXQ52tXJfRAliImyH1_O3LQYnPMK2a6HdjD2m0Wfgx2ZcHfQleijz03kia-HpgnSNf5iYbFelBRPx-B8ckgDWd21JQI5wHXWE1YpJQUVhkAceIEUanbyPtqUj-tLgM7lSaCf4n2-TtcG_gZWikVS_3NyEkV77dHuOcQKvxihxu9HPA\",\n    \"token_type\": \"bearer\",\n    \"expires_in\": 1199,\n    \"refresh_token\": \"ffc43ef188bd48e0925085854dc716de\",\n    \"username\": \"apidemo\",\n    \"display-name\": \"API Demo\",\n    \"user-role\": \"User\",\n    \".issued\": \"Wed, 17 Feb 2021 11:22:50 GMT\",\n    \".expires\": \"Wed, 17 Feb 2021 11:42:50 GMT\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Scenario 2. Using Crew Login Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{OcpApimSubscriptionKey}}",
+						"type": "text"
+					},
+					{
+						"key": "Env",
+						"value": "{{Env}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://apidev.merlot.aero/employee/api/Employee/SummaryWithRank",
+					"protocol": "https",
+					"host": [
+						"apidev",
+						"merlot",
+						"aero"
+					],
+					"path": [
+						"employee",
+						"api",
+						"Employee",
+						"SummaryWithRank"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/Employee/Get (Example)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{OcpApimSubscriptionKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Env",
+								"value": "{{Env}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://apidev.merlot.aero/employee/api/Employee/XXXXX1",
+							"protocol": "https",
+							"host": [
+								"apidev",
+								"merlot",
+								"aero"
+							],
+							"path": [
+								"employee",
+								"api",
+								"Employee",
+								"XXXXX1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1090"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "https://merlot-opt.portal.azure-api.net/"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Request-Context",
+							"value": "appId=cid-v1:57853971-56cd-451a-a044-a6ba9debcc42"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "Request-Context"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 17 Feb 2021 11:39:17 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"active\": true,\n    \"birthCity\": \"\",\n    \"birthCountry\": null,\n    \"birthState\": \"\",\n    \"concessionCardNumber\": null,\n    \"crewPortalUserId\": \"XXXXX1\",\n    \"dateOfBirth\": \"1950-04-28T00:00:00\",\n    \"dateOfJoining\": \"2009-04-28T00:00:00\",\n    \"dateOfTermination\": null,\n    \"doctor\": null,\n    \"empCode\": \"XXXXX1\",\n    \"employeeAddresses\": [\n        {\n            \"city\": \"\",\n            \"country\": \"New Zealand\",\n            \"primary\": true,\n            \"state\": \"\",\n            \"streetNoName\": \"4 Murdoch Rd, Ponsonby\",\n            \"suburb\": null,\n            \"zip\": \"\",\n            \"changeAction\": 0,\n            \"id\": 7\n        }\n    ],\n    \"employeeAttributes\": [\n        {\n            \"active\": true,\n            \"code\": \"MALE\",\n            \"description\": \"Male\",\n            \"useInOptimizer\": true,\n            \"changeAction\": 0,\n            \"id\": 2\n        }\n    ],\n    \"employeeBases\": [\n        {\n            \"accommodation\": false,\n            \"activeFrom\": \"2014-07-12T00:00:00\",\n            \"activeTo\": \"2079-12-31T00:00:00\",\n            \"car\": false,\n            \"port\": \"AKL\",\n            \"temporary\": false,\n            \"changeAction\": 0,\n            \"id\": 20279\n        }\n    ],\n    \"employeeDepartments\": [\n        {\n            \"activeFrom\": \"2014-07-12T00:00:00\",\n            \"activeTo\": \"2079-12-31T00:00:00\",\n            \"assigned\": \"FLIGHT OPERATIONS\",\n            \"changeAction\": 0,\n            \"id\": 3846\n        }\n    ],\n    \"employeeDocuments\": [\n        {\n            \"country\": null,\n            \"documentType\": \"ROST\",\n            \"expiryDate\": \"2020-04-30T23:59:59\",\n            \"issueDate\": \"2020-04-01T00:00:00\",\n            \"issuingAuthority\": \"Crew Planning\",\n            \"name1\": null,\n            \"name2\": null,\n            \"name3\": null,\n            \"number\": \"30/04/20\",\n            \"placeOfIssue\": \"Head Office\",\n            \"type\": \"Roster\",\n            \"changeAction\": 0,\n            \"id\": 15550\n        },\n        {\n            \"country\": null,\n            \"documentType\": \"ROST\",\n            \"expiryDate\": \"2020-05-31T23:59:59\",\n            \"issueDate\": \"2020-05-01T00:00:00\",\n            \"issuingAuthority\": \"Crew Planning\",\n            \"name1\": null,\n            \"name2\": null,\n            \"name3\": null,\n            \"number\": \"06/05/20\",\n            \"placeOfIssue\": \"Head Office\",\n            \"type\": \"Roster\",\n            \"changeAction\": 0,\n            \"id\": 16149\n        },\n        {\n            \"country\": null,\n            \"documentType\": \"RTR\",\n            \"expiryDate\": \"2023-12-31T00:00:00\",\n            \"issueDate\": \"2018-01-01T00:00:00\",\n            \"issuingAuthority\": \" \",\n            \"name1\": null,\n            \"name2\": null,\n            \"name3\": null,\n            \"number\": \"2313\",\n            \"placeOfIssue\": \" \",\n            \"type\": \"RTR\",\n            \"changeAction\": 0,\n            \"id\": 9875\n        }\n    ],\n    \"employeeEmails\": [],\n    \"employeePhones\": [],\n    \"employeeProfiles\": [],\n    \"employeeRatings\": [\n        {\n            \"activeFrom\": \"2014-07-12T00:00:00\",\n            \"activeTo\": \"2079-12-31T23:59:00\",\n            \"equipmentGroup\": \"737-900\",\n            \"equipmentType\": null,\n            \"isPrimary\": \"\",\n            \"rank\": \"CPT\",\n            \"trainee\": false,\n            \"changeAction\": 0,\n            \"id\": 20102\n        },\n        {\n            \"activeFrom\": \"2014-07-12T00:00:00\",\n            \"activeTo\": \"2079-12-31T23:59:00\",\n            \"equipmentGroup\": \"737-900ER\",\n            \"equipmentType\": null,\n            \"isPrimary\": \"\",\n            \"rank\": \"CPT\",\n            \"trainee\": false,\n            \"changeAction\": 0,\n            \"id\": 20103\n        }\n    ],\n    \"employeeStatus\": null,\n    \"idCardNumber\": null,\n    \"knownAs\": \"OTHER TRAINER  OTHER TRAINER\",\n    \"licenseNumber\": \"\",\n    \"lossOfLicense\": false,\n    \"maritalStatus\": null,\n    \"name1\": \"OTHER TRAINER\",\n    \"name2\": \"\",\n    \"name3\": null,\n    \"name4\": \"OTHER TRAINER\",\n    \"nationality\": \"New Zealand\",\n    \"nationalityCountry\": \"New Zealand\",\n    \"partnerName\": null,\n    \"positionCode\": null,\n    \"positionDate\": null,\n    \"qualifiedUntil\": null,\n    \"secretAnswer\": null,\n    \"secretQuestion\": null,\n    \"seniority\": 1,\n    \"sex\": \"M\",\n    \"unionCode\": null,\n    \"changeAction\": 0,\n    \"id\": 2\n}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "OcpApimSubscriptionKey",
+			"value": "cd61513df7c947aea0904b370f7ae32f"
+		},
+		{
+			"key": "Env",
+			"value": "MIAFWF"
+		}
+	]
+}

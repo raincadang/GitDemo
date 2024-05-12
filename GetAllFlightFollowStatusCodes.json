@@ -1,0 +1,279 @@
+{
+	"info": {
+		"_postman_id": "655cced4-342b-4a28-8ae3-acf307f8d6ce",
+		"name": "REGGetAllFlightFollowStatusCodes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authenticate RES API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Save access_token to Postman variables, so that this is\r",
+							"// populated as bearer tokens for subsequent API calls.\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"pm.globals.set('access_token', jsonData.access_token);\r",
+							"console.log(`New token has been set: ${jsonData.access_token}`);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches string MerlotAdmin\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"MerlotAdmin\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Env",
+						"value": "{{Env}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{OcpApimSubscriptionKey}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "MerlotAdmin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Password1!",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "User",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://merlot-opt.azure-api.net/auth/token",
+					"protocol": "https",
+					"host": [
+						"merlot-opt",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"auth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Configure/GetAllFlightFollowStatusCodes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//PLA-313\r",
+							"var email = false\r",
+							"var opsMessage = true\r",
+							"var paxMessage = false\r",
+							"var txt = false\r",
+							"var active = true\r",
+							"var code = \"DEL\"\r",
+							"var id = 1\r",
+							"var name = \"Deleted\"\r",
+							"\r",
+							"var email2 = false\r",
+							"var opsMessage2 = true\r",
+							"var paxMessage2 = false\r",
+							"var txt2 = false\r",
+							"var active2 = true\r",
+							"var code2 = \"CXL\"\r",
+							"var id2 = 2\r",
+							"var name2 = \"Cancelled\"\r",
+							"\r",
+							"//START TEST\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"email\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].email).to.eql(email);\r",
+							"});\r",
+							"pm.test(\"opsMessage\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].opsMessage).to.eql(opsMessage);\r",
+							"});\r",
+							"pm.test(\"paxMessage\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].paxMessage).to.eql(paxMessage);\r",
+							"});\r",
+							"pm.test(\"txt\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].txt).to.eql(txt);\r",
+							"});\r",
+							"pm.test(\"active\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].active).to.eql(active);\r",
+							"});\r",
+							"pm.test(\"code\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].code).to.eql(code);\r",
+							"});\r",
+							"pm.test(\"id\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].id).to.eql(id);\r",
+							"});\r",
+							"pm.test(\"name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].name).to.eql(name);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"email2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[1].email).to.eql(email2);\r",
+							"});\r",
+							"pm.test(\"opsMessage2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[1].opsMessage).to.eql(opsMessage2);\r",
+							"});\r",
+							"pm.test(\"paxMessage2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[1].paxMessage).to.eql(paxMessage2);\r",
+							"});\r",
+							"pm.test(\"txt2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[1].txt).to.eql(txt2);\r",
+							"});\r",
+							"pm.test(\"active2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[1].active).to.eql(active2);\r",
+							"});\r",
+							"pm.test(\"code2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[1].code).to.eql(code2);\r",
+							"});\r",
+							"pm.test(\"id2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[1].id).to.eql(id2);\r",
+							"});\r",
+							"pm.test(\"name2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[1].name).to.eql(name2);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{OcpApimSubscriptionKey}}",
+						"type": "text"
+					},
+					{
+						"key": "Env",
+						"value": "{{Env}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://merlot-opt.azure-api.net/configure/api/Configure/GetAllFlightFollowStatusCodes",
+					"protocol": "https",
+					"host": [
+						"merlot-opt",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"configure",
+						"api",
+						"Configure",
+						"GetAllFlightFollowStatusCodes"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "OcpApimSubscriptionKey",
+			"value": "cd61513df7c947aea0904b370f7ae32f"
+		},
+		{
+			"key": "Env",
+			"value": "HGNSNP"
+		}
+	]
+}

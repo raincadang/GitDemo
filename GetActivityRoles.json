@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "e8515f5c-2f7d-4923-8182-1295a067495f",
+		"name": "REGGetActivityRoles",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authenticate RES API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Save access_token to Postman variables, so that this is\r",
+							"// populated as bearer tokens for subsequent API calls.\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"pm.globals.set('access_token', jsonData.access_token);\r",
+							"console.log(`New token has been set: ${jsonData.access_token}`);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Env",
+						"value": "{{Env}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{OcpApimSubscriptionKey}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "MerlotAdmin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Password1!",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "User",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://merlot-opt.azure-api.net/auth/token",
+					"protocol": "https",
+					"host": [
+						"merlot-opt",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"auth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetActivityRoles",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//PLA-243\r",
+							"var code = \"OP\"\r",
+							"var description = \"Operating\"\r",
+							"var id = 1\r",
+							"var isDutyCode = false\r",
+							"\r",
+							"var code2 = \"DH\"\r",
+							"var description2 = \"Non-operating\"\r",
+							"var id2 = 2\r",
+							"var isDutyCode2 = false\r",
+							"\r",
+							"//START TEST\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"code\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].code).to.eql(code);\r",
+							"});\r",
+							"pm.test(\"description\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].description).to.eql(description);\r",
+							"});\r",
+							"pm.test(\"id\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].id).to.eql(id);\r",
+							"});\r",
+							"pm.test(\"isDutyCode\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].isDutyCode).to.eql(isDutyCode);\r",
+							"});\r",
+							"pm.test(\"code2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[1].code).to.eql(code2);\r",
+							"});\r",
+							"pm.test(\"description2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[1].description).to.eql(description2);\r",
+							"});\r",
+							"pm.test(\"id2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[1].id).to.eql(id2);\r",
+							"});\r",
+							"pm.test(\"isDutyCode2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[1].isDutyCode).to.eql(isDutyCode2);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{OcpApimSubscriptionKey}}",
+						"type": "text"
+					},
+					{
+						"key": "Env",
+						"value": "{{Env}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://merlot-opt.azure-api.net/configure/api/Configure/GetActivityRoles",
+					"protocol": "https",
+					"host": [
+						"merlot-opt",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"configure",
+						"api",
+						"Configure",
+						"GetActivityRoles"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "OcpApimSubscriptionKey",
+			"value": "cd61513df7c947aea0904b370f7ae32f"
+		},
+		{
+			"key": "Env",
+			"value": "HGNSNP"
+		}
+	]
+}
